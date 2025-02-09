@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "name": "dashboard-hospitais",
+  "version": "1.0.0",
+  "description": "Projeto para a disciplina de Probabilidade",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasPaulo001/Dashboard-Hospitais.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasPaulo001/Dashboard-Hospitais/issues"
+  },
+  "homepage": "https://github.com/LucasPaulo001/Dashboard-Hospitais#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-handlebars": "^8.0.1"
+  }
+}

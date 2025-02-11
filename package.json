@@ -5,7 +5,7 @@
   "description": "Projeto para a disciplina de Probabilidade",
   "main": "index.js",
   "scripts": {
-    "dev": "node src/app.js",
+    "dev": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,9 +20,12 @@
   },
   "homepage": "https://github.com/LucasPaulo001/Dashboard-Hospitais#readme",
   "dependencies": {
+    "csv-parser": "^3.2.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1",
-    "mongoose": "^8.10.0"
+    "fs": "^0.0.1-security",
+    "mongoose": "^8.10.0",
+    "nodemon": "^3.1.9"
   }
 }

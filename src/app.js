@@ -9,6 +9,9 @@ dotenv.config()
 //Importação de módulos internos/configurações
 import mongooseConnect from './configs/db.js'
 
+//Importação de rotas
+import home from './routes/Home.js'
+
 //Configurações
     //Config. do express
         const app = express()
@@ -38,9 +41,8 @@ import mongooseConnect from './configs/db.js'
         mongooseConnect(app)
 
     //Configuração de rotas
-        app.get('/', (req, res) => {
-            res.render('pages/home')
-        })
+        //Rota da página inical
+            app.use('/', home)
 
 //Conectando ao servidor
 const PORT = process.env.PORT

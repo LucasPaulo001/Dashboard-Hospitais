@@ -1,1 +1,132 @@
 <h1>Tela principal</h1>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<body>
+    <style>
+        canvas {
+            margin: 20px;
+            max-width: 600px;
+        }
+    </style>
+
+    <h1>Gráficos</h1>
+    
+    <h2>Gráfico de Barras</h2>
+    <canvas id="graficoBarra" width="200" height="100"></canvas>
+    
+    <h2>Gráfico de Colunas</h2>
+    <canvas id="graficoColuna" width="200" height="100"></canvas>
+    
+    <h2>Gráfico de Pizza</h2>
+    <canvas id="graficoPizza" width="200" height="100"></canvas>
+    
+    <h2>Gráfico de Linha</h2>
+    <canvas id="graficoLinha" width="200" height="100"></canvas>
+
+    <script>
+        // Dados para todos os gráficos
+        const labels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'];
+        const dadosVendas = [50, 70, 100, 80, 120];
+        const cores = [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)'
+        ];
+
+        // Gráfico de Barras 
+        const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
+        new Chart(ctxBarra, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Vendas em 2025',
+                    data: dadosVendas,
+                    backgroundColor: cores,
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Gráfico de Colunas (Barra Vertical) 
+        const ctxColuna = document.getElementById('graficoColuna').getContext('2d');
+        new Chart(ctxColuna, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Vendas em 2025',
+                    data: dadosVendas,
+                    backgroundColor: cores,
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y', // Coloca as barras na horizontal
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Gráfico de Pizza 
+        const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
+        new Chart(ctxPizza, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Vendas em 2025',
+                    data: dadosVendas,
+                    backgroundColor: cores,
+                    borderColor: '#fff',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Gráfico de Linha 
+        const ctxLinha = document.getElementById('graficoLinha').getContext('2d');
+        new Chart(ctxLinha, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Vendas em 2025',
+                    data: dadosVendas,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderWidth: 2,
+                    tension: 0.3 // Deixa a linha levemente curva
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>

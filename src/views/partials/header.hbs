@@ -1,0 +1,44 @@
+<nav class="navbar header navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Data-Hospital</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="d-flex w-50 search gap-3" method="get" action="/" role="search">
+        <select name="MUNICIPIO" class="form-select w-50" id="city" aria-label="Escolha a cidade">
+            <option value="">Escolha a cidade</option>
+            {{#each cidades}}
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    </div>
+  </div>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2/dist/css/select2.min.css" rel="stylesheet" />
+
+<script>
+    $(document).ready(function () {
+        $('#city').select2({
+            placeholder: 'Escolha a cidade',
+            allowClear: true,
+            minimumInputLength: 1,
+            language: {
+                noResults: function () {
+                    return "Nenhuma cidade encontrada";
+                }
+            }
+        });
+
+        // Mantém a cidade selecionada após a busca
+        const selectedCity = "{{MUNICIPIO}}";
+        if (selectedCity) {
+            $('#city').val(selectedCity).trigger('change');
+        }
+    });
+</script>

@@ -1,54 +1,69 @@
-<h1>Tela principal</h1>
+<div class="content container mt-4">
+    <div class="top">
+        <h3>Dados do "Nome do hospital"</h3>
+        <div id="dadosText">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi blanditiis, sit nobis et officiis fuga qui nesciunt animi aliquid ab vitae impedit, magni velit deleniti placeat laboriosam aspernatur magnam pariatur?
+        </div>
+    </div>
+    <div class="graphic">
+        <div class="content-graphic">
+            <canvas class="leitosChart" id="leitosChart"></canvas>
+    
+            <canvas class="leitosChart pie" id="graficoPizza"></canvas>
+        </div>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<body>
-    <style>
-        canvas {
-            margin: 20px;
-            max-width: 600px;
-        }
-    </style>
+{{!-- Scripts do select2 --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
-    <h1>Gráficos</h1>
-    
-    <h2>Gráfico de Barras</h2>
-    <canvas id="graficoBarra" width="200" height="100"></canvas>
-    
-    <h2>Gráfico de Colunas</h2>
-    <canvas id="graficoColuna" width="200" height="100"></canvas>
-    
-    <h2>Gráfico de Pizza</h2>
-    <canvas id="graficoPizza" width="200" height="100"></canvas>
-    
-    <h2>Gráfico de Linha</h2>
-    <canvas id="graficoLinha" width="200" height="100"></canvas>
+<script src="/js/select2.js"></script>
 
-    <script>
-        // Dados para todos os gráficos
-        const labels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'];
-        const dadosVendas = [50, 70, 100, 80, 120];
-        const cores = [
-            'rgba(54, 162, 235, 0.7)',
-            'rgba(255, 99, 132, 0.7)',
-            'rgba(75, 192, 192, 0.7)',
-            'rgba(153, 102, 255, 0.7)',
-            'rgba(255, 159, 64, 0.7)'
-        ];
+<script>
+    // Pegando os dados enviados pelo servidor
+    const hospitaisContados = {{{ hospitaisJSON }}};
 
-        // Gráfico de Barras 
-        const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
-        new Chart(ctxBarra, {
+    if (hospitaisContados.length > 0) {
+        const ctx = document.getElementById('leitosChart');
+
+        // Usando as cidades, leitos SUS, leitos existentes e os nomes dos hospitais
+        const labels = hospitaisContados.map(hospital => hospital._id);  // Cidades
+        const leitosSUS = hospitaisContados.map(hospital => hospital.totalLeitosSUS);  // Soma dos Leitos SUS por cidade
+        const leitosUTI = hospitaisContados.map(hospital => hospital.totalUTI)
+        const leitosExistentes = hospitaisContados.map(hospital => hospital.totalLeitosExistentes);  // Soma dos Leitos Existentes por cidade
+        const nomesHospitais = hospitaisContados.map(hospital => hospital.nomesHospitais);  // Lista de nomes dos hospitais
+
+        const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Vendas em 2025',
-                    data: dadosVendas,
-                    backgroundColor: cores,
-                    borderColor: '#fff',
-                    borderWidth: 1
-                }]
+                labels: labels,  // Cidades
+                datasets: [
+                    {
+                        label: 'Leitos SUS',
+                        data: leitosSUS,  // Total de Leitos SUS por cidade
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                    },
+                    {
+                        label: 'Leitos Existentes',
+                        data: leitosExistentes,  // Total de Leitos Existentes por cidade
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Total de leitos UTI',
+                        data: leitosUTI,
+                        backgroundColor: 'rgba(102, 99, 132, 0.2)',
+                        borderColor: 'rgba(123, 99, 132, 1)',
+                        borderWidth: 1
+
+                    }
+                ]
             },
             options: {
                 responsive: true,
@@ -56,77 +71,62 @@
                     y: {
                         beginAtZero: true
                     }
-                }
-            }
-        });
-
-        // Gráfico de Colunas (Barra Vertical) 
-        const ctxColuna = document.getElementById('graficoColuna').getContext('2d');
-        new Chart(ctxColuna, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Vendas em 2025',
-                    data: dadosVendas,
-                    backgroundColor: cores,
-                    borderColor: '#fff',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                indexAxis: 'y', // Coloca as barras na horizontal
-                scales: {
-                    x: {
-                        beginAtZero: true
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            // Exibe os nomes dos hospitais no tooltip
+                            afterLabel: function(tooltipItem) {
+                                const cidade = tooltipItem.label;
+                                const index = labels.indexOf(cidade);
+                                const hospitais = nomesHospitais[index];
+                                return 'Hospitais: ' + hospitais.join(', ');  // Lista os hospitais no tooltip
+                            }
+                        }
                     }
                 }
             }
         });
 
+        // Reseta o zoom ao clicar duas vezes
+        ctx.ondblclick = () => {
+            myChart.resetZoom();
+        };
+    
         // Gráfico de Pizza 
         const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
         new Chart(ctxPizza, {
             type: 'pie',
             data: {
                 labels: labels,
-                datasets: [{
-                    label: 'Vendas em 2025',
-                    data: dadosVendas,
-                    backgroundColor: cores,
-                    borderColor: '#fff',
-                    borderWidth: 3
-                }]
+                datasets: [
+                    {
+                        label: 'Leitos SUS',
+                        data: leitosSUS,  // Total de Leitos SUS por cidade
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                    },
+                    {
+                        label: 'Leitos Existentes',
+                        data: leitosExistentes,  // Total de Leitos Existentes por cidade
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Total de leitos UTI',
+                        data: leitosUTI,
+                        backgroundColor: 'rgba(102, 99, 132, 0.2)',
+                        borderColor: 'rgba(123, 99, 132, 1)',
+                        borderWidth: 1
+
+                    }
+                ]
             },
             options: {
                 responsive: true
             }
         });
-
-        // Gráfico de Linha 
-        const ctxLinha = document.getElementById('graficoLinha').getContext('2d');
-        new Chart(ctxLinha, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Vendas em 2025',
-                    data: dadosVendas,
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderWidth: 2,
-                    tension: 0.3 // Deixa a linha levemente curva
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
-</body>
+        }
+</script>

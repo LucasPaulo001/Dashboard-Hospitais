@@ -29,13 +29,26 @@ import home from './routes/Home.js'
             const hbs = create({
                 extname: 'hbs',
                 defaultLayout: 'main',
-                layoutsDir: path.join(__dirname, 'views', 'layout')
+                layoutsDir: path.join(__dirname, 'views', 'layout'),
+                helpers: {
+                    json: function (context) {
+                        return JSON.stringify(context);
+                    }
+                },
+                helpers: {
+                    eq: function (a, b) {
+                        return a === b;
+                    }
+                }
             })
 
         //Config de engine   
             app.engine('hbs', hbs.engine)
             app.set('view engine', 'hbs')
             app.set('views', path.join(__dirname, 'views'))
+
+        //Config. de arquivos estáticos
+            app.use(express.static(path.join(__dirname, '../public')))
 
     //Config. do banco de dados
         mongooseConnect(app)

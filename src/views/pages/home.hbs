@@ -1,9 +1,18 @@
 <div class="content container mt-4">
     <div class="top">
-        <h3>Dados do "Nome do hospital"</h3>
-        <div id="dadosText">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi blanditiis, sit nobis et officiis fuga qui nesciunt animi aliquid ab vitae impedit, magni velit deleniti placeat laboriosam aspernatur magnam pariatur?
+        <div class="topList">
+            <h3>Cidades cadastradas:</h3>
+            <small>Cidades da Paraíba</small>
         </div>
+        <ul class="list-group w-100">
+            {{#each cidades}}
+                <li class="list-group-item d-flex justify-content-center">{{this}}</li>
+            {{/each}}
+        </ul>
+        <div id="localLine">
+            <canvas class="leitosChart line" id="graficoLine"></canvas>
+        </div>
+        
     </div>
     <div class="graphic">
         <div class="content-graphic">
@@ -15,6 +24,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.0.0/dist/chartjs-plugin-zoom.min.js"></script>
 
 {{!-- Scripts do select2 --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -23,6 +33,8 @@
 <script src="/js/select2.js"></script>
 
 <script>
+    Chart.register(ChartZoom);
+
     // Pegando os dados enviados pelo servidor
     const hospitaisContados = {{{ hospitaisJSON }}};
 
@@ -41,13 +53,6 @@
             data: {
                 labels: labels,  // Cidades
                 datasets: [
-                    {
-                        label: 'Leitos SUS',
-                        data: leitosSUS,  // Total de Leitos SUS por cidade
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                    },
                     {
                         label: 'Leitos Existentes',
                         data: leitosExistentes,  // Total de Leitos Existentes por cidade
@@ -82,6 +87,17 @@
                                 const hospitais = nomesHospitais[index];
                                 return 'Hospitais: ' + hospitais.join(', ');  // Lista os hospitais no tooltip
                             }
+                        }
+                    },
+                    zoom: {
+                        zoom: {
+                            wheel: {
+                                enabled: true, // Habilita o zoom com a roda do mouse
+                            },
+                            pinch: {
+                                enabled: true // Habilita o zoom com pinça (gesto de zoom em telas touch)
+                            },
+                            mode: 'xy', // Define a direção do zoom ('x', 'y' ou 'xy')
                         }
                     }
                 }
@@ -125,7 +141,70 @@
                 ]
             },
             options: {
-                responsive: true
+                responsive: true,
+                 plugins: {
+                    tooltip: {
+                        callbacks: {
+                            // Exibe os nomes dos hospitais no tooltip
+                            afterLabel: function(tooltipItem) {
+                                const cidade = tooltipItem.label;
+                                const index = labels.indexOf(cidade);
+                                const hospitais = nomesHospitais[index];
+                                return 'Hospitais: ' + hospitais.join(', ');  // Lista os hospitais no tooltip
+                            }
+                        }
+                    },
+                    zoom: {
+                        zoom: {
+                            wheel: {
+                                enabled: true, // Habilita o zoom com a roda do mouse
+                            },
+                            pinch: {
+                                enabled: true // Habilita o zoom com pinça (gesto de zoom em telas touch)
+                            },
+                            mode: 'xy', // Define a direção do zoom ('x', 'y' ou 'xy')
+                        }
+                    }
+                }
+            }
+        });
+
+            //Gráfico de linha
+            const ctxLine = document.getElementById('graficoLine').getContext('2d');
+
+            new Chart(ctxLine, {
+            type: 'line', // Define o tipo de gráfico como linha
+            data: {
+                labels: labels, // Rótulos do eixo x
+                datasets: [
+                    {
+                        label: 'Leitos SUS',
+                        data: leitosSUS,  // Total de Leitos SUS por cidade
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Define o eixo y para começar em 0
+                    }
+                },
+                zoom: {
+                    zoom: {
+                        wheel: {
+                            enabled: true, // Habilita o zoom com a roda do mouse
+                        },
+                        pinch: {
+                            enabled: true // Habilita o zoom com pinça (gesto de zoom em telas touch)
+                        },
+                        mode: 'xy', // Define a direção do zoom ('x', 'y' ou 'xy')
+                    }
+                }
+                
             }
         });
         }

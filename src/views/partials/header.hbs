@@ -5,8 +5,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="d-flex w-50 search gap-3" method="get" action="/" role="search">
-        <select name="MUNICIPIO" class="form-select w-50" id="city" aria-label="Escolha a cidade">
+      <form class="d-flex search gap-3" method="get" action="/" role="search">
+        <select name="MUNICIPIO" class="form-select w-100 form-select-lg mb-3" id="city" aria-label="Escolha a cidade">
             <option value="">Escolha a cidade</option>
             {{#each cidades}}
                 <option value="{{this}}">{{this}}</option>

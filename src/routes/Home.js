@@ -43,4 +43,19 @@ home.get("/", (req, res) => {
     });
 });
 
+home.get("/:municipio", (req, res) => {
+    const { municipio } = req.params
+    Hospital.find({ MUNICIPIO: municipio.toUpperCase() })
+        .then((hospitais) => {
+            if (hospitais.length === 0) {
+                return res.status(404).send("Nenhum hospital encontrado neste município.");
+            }
+            res.render('/home', { hospitais: hospitais })
+        })
+        .catch((error) => {
+            console.error("Erro ao buscar hospitais:", error)
+            res.status(500).send("Erro ao buscar dados.")
+        })
+})
+
 export default home;

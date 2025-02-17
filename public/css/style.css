@@ -15,13 +15,13 @@
 }
 body, html{
     background-color: #3F52BF !important;
-    color: white !important;
     background-image: url('/assets/background.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
+
 .leitosChart{
     width: 100% !important;
     height: 50% !important;
@@ -44,16 +44,38 @@ body, html{
 }
 .top{
     width: 100%;
-    height: 100%;
+    height: 70%;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
     background-color: transparent;
     backdrop-filter: blur(5px);
-    padding: 20px;
     border: 1px solid;
     border-radius: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.topList{
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999999 !important;
+    background-color: #48489f;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+.line{
+    height: 95% !important;
+    width: 80% !important;
+}
+#localLine{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
 }
 .content{
     display: flex;
@@ -61,6 +83,7 @@ body, html{
     align-items: center;
     height: 100vh;
     gap: 30px;
+    color: white !important;
 }
 #dadosText{
     height: 50%;
@@ -74,12 +97,35 @@ body, html{
 .graphic .pie{
     width: 50% !important;
 }
+.search{
+    width: 50% !important;
+}
 @media(max-width: 640px){
     .content{
         display: flex;
         flex-direction: column;
+        height: auto;
+    }
+    #localLine{
+        height: 300px;
+        width: 100%;
+    }
+    .line{
+        width: 100% !important;
     }
     .top{
         text-align: center;
+        width: 100%;
+        height: 70vh;
+    }
+    .search{
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center;
+        display: flex;
+        justify-content: center;
+    }
+    .graphic .pie {
+        width: 100% !important;
     }
 }

@@ -39,7 +39,11 @@ import home from './routes/Home.js'
                     eq: function (a, b) {
                         return a === b;
                     }
-                }
+                },
+                runtimeOptions: {
+                    allowProtoPropertiesByDefault: true, 
+                    allowProtoMethodsByDefault: true, 
+                  }
             })
 
         //Config de engine   
@@ -52,6 +56,18 @@ import home from './routes/Home.js'
 
     //Config. do banco de dados
         mongooseConnect(app)
+
+    //Helper de condição
+        app.use((req, res, next) => {
+            if(req.path == '/'){
+                res.locals.showHeader = false
+            }
+            else{
+                res.locals.showHeader = true
+            }
+
+            next()
+        })
 
     //Configuração de rotas
         //Rota da página inical

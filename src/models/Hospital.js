@@ -38,4 +38,4 @@ const hospitalSchema = new Schema({
     UTI_CORONARIANA_SUS: { type: Number, required: true },
 })
 
-export default mongoose.model('HospitalData', hospitalSchema)
+export default mongoose.model('hospitalDados', hospitalSchema)

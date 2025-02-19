@@ -173,7 +173,7 @@
             const ctxLine = document.getElementById('graficoLine').getContext('2d');
 
             new Chart(ctxLine, {
-            type: 'line', // Define o tipo de gráfico como linha
+            type: 'polarArea', // Define o tipo de gráfico como linha
             data: {
                 labels: labels, // Rótulos do eixo x
                 datasets: [
@@ -184,6 +184,13 @@
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1,
                         fill: true
+                    },
+                    {
+                        label: 'Leitos Existentes',
+                        data: leitosExistentes,  // Total de Leitos Existentes por cidade
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
                     }
                 ]
             },

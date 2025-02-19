@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/LucasPaulo001/Dashboard-Hospitais#readme",
   "dependencies": {
+    "chartjs-plugin-zoom": "^2.2.0",
     "csv-parser": "^3.2.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

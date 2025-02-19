@@ -1,6 +1,10 @@
-import { Router } from "express";
-const home = Router();
-import Hospital from "../models/Hospital.js";
+import { Router } from "express"
+const home = Router()
+import Hospital from "../models/Hospital.js"
+import fs from 'fs'
+import csvParser from "csv-parser"
+import path from "path"
+import { fileURLToPath } from 'url'
 
 home.get("/", (req, res) => {
     const { MUNICIPIO } = req.query;
@@ -43,19 +47,33 @@ home.get("/", (req, res) => {
     });
 });
 
-home.get("/:municipio", (req, res) => {
-    const { municipio } = req.params
-    Hospital.find({ MUNICIPIO: municipio.toUpperCase() })
-        .then((hospitais) => {
-            if (hospitais.length === 0) {
-                return res.status(404).send("Nenhum hospital encontrado neste município.");
-            }
-            res.render('/home', { hospitais: hospitais })
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+home.get('/importcsv', (req, res) => {
+    const fileCSV = path.join(__dirname, '../data/leitosPBS.csv')
+
+    fs.createReadStream(fileCSV)
+    .pipe(csvParser())
+    .on('data', (data) => {
+        const novoHospital = new Hospital(data)
+        novoHospital.save()
+        .then(() => {
+            console.log("Dados salvos com sucesso!")
         })
         .catch((error) => {
-            console.error("Erro ao buscar hospitais:", error)
-            res.status(500).send("Erro ao buscar dados.")
+            console.log("Erro ao salvar dados: ", error)
         })
+    })
+    .on('end', () => {
+        console.log("Arquivo csv processado com sucesso!")
+        res.send('Dados importados com sucesso!')
+    })
+    .on('error', (err) => {
+        console.log('Erro ao ler o CSV:', err);
+        res.status(500).send('Erro ao processar o arquivo CSV');
+    })
+    //res.send('<h1>Importação desativada temporariamente!</h1>')
 })
 
 export default home;

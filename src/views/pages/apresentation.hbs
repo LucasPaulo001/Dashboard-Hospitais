@@ -1,29 +1,29 @@
-
-<div class="container">
-
-</div>
-
 <div class="container mt-4 contentCard">
-    <div class="card w-50">
+    <div class="card">
         <div class="card-header">
-            <h3>Dados totais</h3>
+            <h3>Quantidade de hospitais cadastrados:</h3>
         </div>
         <div class="card-body">
-            Dados totais: {{dataHospital.length}}
-        </div>
-        <div class="card-footer">
-
+            <div class="data">
+                <h3>Hospitais Cadastrados: {{dataHospital.length}}</h3>
+            </div>
         </div>
     </div>
-    <div class="card w-50">
+    <div class="card">
         <div class="card-header">
-            <h3>Dados totais</h3>
+            <h3>Municípios e seus hospitais cadastrados:</h3>
         </div>
-        <div class="card-body">
-
-        </div>
-        <div class="card-footer">
-
+        <div class="card-body card-body-data-local">
+            <div class="dataLocais">
+                {{#each dataHospital}}
+                    <ul class="localdata">
+                        <span class="cityName">{{this.MUNICIPIO}}</span>
+                        <span class="nameH">{{this.NOME_ESTABELECIMENTO}}</span>
+                        <a href="/hospital/{{this._id}}"><button data-id="{{this._id}}" class="btn btn-outline-light">Dados</button></a>
+                    </ul>
+                    <hr>
+                {{/each}}
+            </div>
         </div>
     </div>
 </div>

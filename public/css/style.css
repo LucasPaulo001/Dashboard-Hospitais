@@ -4,17 +4,13 @@
     box-sizing: border-box;
 }
 .header{
-    position: sticky !important;
-    top: 0;
-    left: 0;
-    right: 0;
     z-index: 999;
-    backdrop-filter: blur(14px) !important;
-    background-color: #00000017 !important;
-    border-bottom: 3px solid white;
+    background-color: #00000031 !important;
+    backdrop-filter: blur(1px) !important;
+    color: white !important;
 }
 body, html{
-    background-color: #3F52BF !important;
+    background-color: white !important;
     background-image: url('/assets/background.jpg');
     background-position: center;
     background-repeat: no-repeat;
@@ -100,6 +96,15 @@ body, html{
 .search{
     width: 50% !important;
 }
+.card{
+    background-color: #7552f2b3 !important;
+    color: white !important;
+    backdrop-filter: blur(1px);
+    border: 1px solid;
+}
+#city{
+    width: 100%;
+}
 @media(max-width: 640px){
     .content{
         display: flex;
@@ -127,5 +132,8 @@ body, html{
     }
     .graphic .pie {
         width: 100% !important;
+    }
+    #city{
+        width: 50% !important;
     }
 }

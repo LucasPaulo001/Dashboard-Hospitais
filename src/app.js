@@ -59,14 +59,15 @@ import home from './routes/Home.js'
 
     //Helper de condição
         app.use((req, res, next) => {
-            if(req.path == '/'){
-                res.locals.showHeader = false
+        
+            // Verifica se o caminho está na lista de rotas ou se corresponde ao padrão da rota dinâmica
+            if (/^\/hospital\/[^/]+$/.test(req.path)){
+                res.locals.showHeader = false;
+            } else {
+                res.locals.showHeader = true;
             }
-            else{
-                res.locals.showHeader = true
-            }
-
-            next()
+        
+        next();
         })
 
     //Configuração de rotas

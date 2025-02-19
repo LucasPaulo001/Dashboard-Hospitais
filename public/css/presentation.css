@@ -2,4 +2,126 @@
     display: flex;
     justify-content: center;
     gap: 40px;
+    margin-bottom: 10%;
+}
+.topSection{
+    background-color: #ffffff30 !important;
+    backdrop-filter: blur(6px) !important;
+    color: white;
+    box-shadow: 0px 2px 8px;
+    text-align: center;
+}
+.topSectionDetail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.lead{
+    text-align: center;
+}
+.data{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.card-body-data-local{
+    overflow-y: scroll;
+    height: 270px;
+}
+.cityName{
+    font-weight: bolder;
+    text-align: center;
+    width: 120px;
+}
+.localdata{
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    text-align: center;
+}
+.nameH{
+    width: 50%;
+}
+.windowData{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff29;
+    position: fixed;
+    top: 0;
+    backdrop-filter: blur(3px);
+}
+.window{
+    width: 80%;
+    height: 50%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+.closeIcon{
+    right: 0;
+    position: absolute;
+    top: 0;
+    color: red;
+    border: 1px solid;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.local-card-data{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+    margin: 30px;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+#leitosTotaisChart{
+    height: 100% !important;
+    width: 77% !important;
+}
+#hospitalChart{
+    height: 91% !important;
+    width: 100% !important;
+}
+.cardInter{
+    border: 1px solid white !important;
+}
+@media(max-width: 640px){
+    .card{
+        width: 100% !important;
+    }
+    .contentCard{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .localdata{
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 0;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .nameH{
+        width: 100%;
+    }
+    .local-card-data {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        row-gap: 20px;
+        column-gap: 20px;
+        margin: 30px;
+    }
 }

@@ -6,7 +6,7 @@ const application = 'Dashboard Hospitals'
 
 //Função de conexão com o banco de dados
 const mongooseConnect = (app) => {
-    mongoose.connect('mongodb://127.0.0.1:27017/DashoardHosp')
+    mongoose.connect(process.env.DB_URI)
     .then(() => {
         console.log(`Conectado ao mongoose com sucesso! APP: ${application}`)
     })

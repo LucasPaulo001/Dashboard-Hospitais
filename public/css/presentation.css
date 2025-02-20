@@ -1,5 +1,7 @@
 .contentCard{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
     justify-content: center;
     gap: 40px;
     margin-bottom: 10%;
@@ -22,6 +24,8 @@
 }
 .data{
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     height: 100%;
@@ -29,6 +33,7 @@
 .card-body-data-local{
     overflow-y: scroll;
     height: 270px;
+    overflow-x: hidden;
 }
 .cityName{
     font-weight: bolder;
@@ -114,7 +119,47 @@
     align-items: center;
     gap: 20px;
 }
+#second-card{
+    grid-column: 2;
+    grid-row: 1;
+}
+#first-card, #last-card{
+    height: 50vh;
+}
+#content-info-geral{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#download-local{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#btns-download{
+    width: 100%;
+    border-top: 1px solid rgb(192, 192, 192);
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+#card-download-mobile{
+    display: none;
+}
 @media(max-width: 640px){
+    #card-download-mobile{
+        display:flex;
+    }
+    #last-card{
+        display: none !important;
+    }
+    #second-card{
+        height: 60vh !important;
+    }
+    #first-card{
+        height: 40vh;
+    }
     .select2-selection__rendered{
         width: 200px !important;
     }

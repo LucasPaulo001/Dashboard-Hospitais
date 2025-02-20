@@ -8,6 +8,7 @@
     background-color: #00000031 !important;
     backdrop-filter: blur(1px) !important;
     color: white !important;
+    padding: 20px !important;
 }
 body, html{
     background-color: white !important;

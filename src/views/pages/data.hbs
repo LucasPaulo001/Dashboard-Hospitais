@@ -1,0 +1,124 @@
+<div class="container mt-4 d-flex justify-content-center">
+    <h4 class="text-light"><strong>{{data.MUNICIPIO}}</strong> - {{data.NOME_ESTABELECIMENTO}}</h4>
+</div>
+<hr class="text-light">
+<div class="conteiner local-card-data">
+    <div class="card">
+        <div class="card-header">
+            <h4>Dados do Estabelecimento</h4>
+        </div>
+        <div class="card-body">
+            <div class="card cardInter">
+                <div class="card-header">
+                    <h4>Natureza jurídica:</h4>
+                    <img src="/assets/equipe.png" height="40px" alt="">
+                </div>
+                <div class="card-body">
+                    <span class="nj">{{data.DESC_NATUREZA_JURIDICA}}</span>
+                </div>
+            </div>
+            <div class="card cardInter">
+                <div class="card-header">
+                    <h4>Tipo de Unidade:</h4>
+                     <img src="/assets/hospital.png" height="40px" alt="">
+                </div>
+                <div class="card-body">
+                    <span class="tu">{{data.DS_TIPO_UNIDADE}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4>Leitos SUS/UTI</h4>
+        </div>
+        <div class="card-body">
+            <canvas id="hospitalChart"></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4>Leitos Totais</h4>
+        </div>
+        <div class="card-body">
+            <canvas id="leitosTotaisChart"></canvas>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Obtendo os dados passados pelo servidor
+    const leitosExistentes = {{leitosExistentes}};
+    const leitosSUS = {{leitosSUS}};
+    const leitosUTI = {{leitosUTI}};
+
+    // Criando o gráfico Chart.js
+    const ctx = document.getElementById('hospitalChart').getContext('2d')
+    const ctx2 = document.getElementById('leitosTotaisChart').getContext('2d')
+    new Chart(ctx, {
+        type: 'bar',  // Tipo do gráfico (barras)
+        data: {
+            labels: ['Leitos SUS', 'Leitos UTI'],
+            datasets: [{
+                label: 'Quantidade de Leitos',
+                data: [leitosSUS, leitosUTI], // Dados do MongoDB
+                backgroundColor: ['#ff6384', '#ffce56'], // Cores
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                beginAtZero: true,
+                ticks: {color: "black"},
+                title: { display: true, text: "Quantidade", color: "black" }
+            },
+                x: {
+                    ticks: {
+                        color: "black" // Cor dos rótulos do eixo X
+                    },
+                    title: { display: true, text: "Quantidade", color: "black" }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: "black" }
+                }
+            }
+        }
+    });
+
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Leitos Existentes'],
+            datasets: [{
+                label: 'Quantidade total de leitos',
+                data: [leitosExistentes],
+                backgroundColor: ['#36a2eb'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true,
+                    ticks: {
+                        color: "black"
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: "black" // Cor dos rótulos do eixo X
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: "black" }
+                }
+            }
+        }
+    })
+</script>

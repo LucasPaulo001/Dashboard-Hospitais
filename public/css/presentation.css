@@ -1,0 +1,198 @@
+.contentCard{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 10%;
+}
+.topSection{
+    background-color: #ffffff30 !important;
+    backdrop-filter: blur(6px) !important;
+    color: white;
+    box-shadow: 0px 2px 8px;
+    text-align: center;
+}
+.topSectionDetail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.lead{
+    text-align: center;
+}
+.data{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.card-body-data-local{
+    overflow-y: scroll;
+    height: 270px;
+    overflow-x: hidden;
+}
+.cityName{
+    font-weight: bolder;
+    text-align: center;
+    width: 120px;
+}
+.localdata{
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    text-align: center;
+}
+.nameH{
+    width: 50%;
+}
+.windowData{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff29;
+    position: fixed;
+    top: 0;
+    backdrop-filter: blur(3px);
+}
+.window{
+    width: 80%;
+    height: 50%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+.closeIcon{
+    right: 0;
+    position: absolute;
+    top: 0;
+    color: red;
+    border: 1px solid;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.local-card-data{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+    margin: 30px;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+#leitosTotaisChart{
+    height: 100% !important;
+    width: 77% !important;
+}
+#hospitalChart{
+    height: 91% !important;
+    width: 100% !important;
+}
+.cardInter{
+    border: 1px solid white !important;
+}
+.btnData{
+    border: 1px solid #48489f !important;
+}
+.btnData:hover{
+    background-color: #48489f !important;
+    color: white !important;
+}
+.nj{
+    border-bottom: 1px solid #48489f;
+}
+.tu{
+    border-bottom: 1px solid #000092;
+}
+.card-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+#second-card{
+    grid-column: 2;
+    grid-row: 1;
+}
+#first-card, #last-card{
+    height: 50vh;
+}
+#content-info-geral{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#download-local{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#btns-download{
+    width: 100%;
+    border-top: 1px solid rgb(192, 192, 192);
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+#card-download-mobile{
+    display: none;
+}
+@media(max-width: 640px){
+    #card-download-mobile{
+        display:flex;
+    }
+    #last-card{
+        display: none !important;
+    }
+    #second-card{
+        height: 60vh !important;
+    }
+    #first-card{
+        height: 40vh;
+    }
+    .select2-selection__rendered{
+        width: 200px !important;
+    }
+    .card-header{
+        flex-direction: column;
+        gap: 0;
+    }
+    .card{
+        width: 100% !important;
+    }
+    .contentCard{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .localdata{
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 0;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .nameH{
+        width: 100%;
+    }
+    .local-card-data {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        row-gap: 20px;
+        column-gap: 20px;
+        margin: 30px;
+    }
+}

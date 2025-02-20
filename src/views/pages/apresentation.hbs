@@ -1,0 +1,66 @@
+<div class="container mt-4 contentCard">
+    <div id="content-info-geral">
+        <div class="card" id="first-card">
+            <div class="card-header">
+                <h3>Quantidade de hospitais cadastrados:</h3>
+            </div>
+            <div class="card-body">
+                <div class="data">
+                    <img src="/assets/cadastre-se.png" height="60px" alt="">
+                    <h3>Hospitais Cadastrados: {{dataHospital.length}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card" id="last-card">
+            <div class="card-header">
+                <h4>Faça download dos dados</h4>
+            </div>
+            <div class="card-body" id="download-local">
+                <div>
+                    <img src="/assets/download-direto.png" height="100px" alt="">
+                </div>
+                <div id="btns-download">
+                    <a download href="/docs/leitosPB.csv">
+                        <button class="btn btn-success">
+                            <img src="/assets/csv.png" height="40px" alt="">
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" id="second-card">
+        <div class="card-header">
+            <h3>Municípios e seus hospitais cadastrados:</h3>
+        </div>
+        <div class="card-body card-body-data-local">
+            <div class="dataLocais">
+                {{#each dataHospital}}
+                    <ul class="localdata">
+                        <span class="cityName">{{this.MUNICIPIO}}</span>
+                        <span class="nameH">{{this.NOME_ESTABELECIMENTO}}</span>
+                        <a href="/hospital/{{this._id}}"><button data-id="{{this._id}}" class="btn btnData">Dados</button></a>
+                    </ul>
+                    <hr>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="card card-mobile-download" id="card-download-mobile">
+        <div class="card-header">
+            <h4>Faça download dos dados</h4>
+        </div>
+        <div class="card-body" id="download-local">
+            <div>
+                <img src="/assets/download-direto.png" height="100px" alt="">
+            </div>
+            <div id="btns-download">
+                <a download href="/docs/leitosPB.csv">
+                    <button class="btn btn-success">
+                        <img src="/assets/csv.png" height="40px" alt="">
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

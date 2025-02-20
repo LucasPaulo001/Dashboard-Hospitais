@@ -97,10 +97,13 @@ body, html{
     width: 50% !important;
 }
 .card{
-    background-color: #7552f2b3 !important;
-    color: white !important;
+    background-color: #ffffffd7 !important;
+    color: rgb(0, 0, 0) !important;
     backdrop-filter: blur(1px);
     border: 1px solid;
+}
+.dataLocais{
+    height: 100%;
 }
 #city{
     width: 100%;

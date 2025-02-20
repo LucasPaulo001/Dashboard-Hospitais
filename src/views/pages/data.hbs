@@ -1,6 +1,7 @@
 <div class="container mt-4 d-flex justify-content-center">
     <h4 class="text-light"><strong>{{data.MUNICIPIO}}</strong> - {{data.NOME_ESTABELECIMENTO}}</h4>
 </div>
+<hr class="text-light">
 <div class="conteiner local-card-data">
     <div class="card">
         <div class="card-header">
@@ -10,17 +11,19 @@
             <div class="card cardInter">
                 <div class="card-header">
                     <h4>Natureza jurídica:</h4>
+                    <img src="/assets/equipe.png" height="40px" alt="">
                 </div>
                 <div class="card-body">
-                    <strong>{{data.DESC_NATUREZA_JURIDICA}}</strong>
+                    <span class="nj">{{data.DESC_NATUREZA_JURIDICA}}</span>
                 </div>
             </div>
             <div class="card cardInter">
                 <div class="card-header">
                     <h4>Tipo de Unidade:</h4>
+                     <img src="/assets/hospital.png" height="40px" alt="">
                 </div>
                 <div class="card-body">
-                    {{data.DS_TIPO_UNIDADE}}</strong>
+                    <span class="tu">{{data.DS_TIPO_UNIDADE}}</span>
                 </div>
             </div>
         </div>
@@ -68,19 +71,19 @@
             scales: {
                 y: {
                 beginAtZero: true,
-                ticks: {color: "white"},
-                title: { display: true, text: "Quantidade", color: "white" }
+                ticks: {color: "black"},
+                title: { display: true, text: "Quantidade", color: "black" }
             },
                 x: {
                     ticks: {
-                        color: "white" // Cor dos rótulos do eixo X
+                        color: "black" // Cor dos rótulos do eixo X
                     },
-                    title: { display: true, text: "Quantidade", color: "white" }
+                    title: { display: true, text: "Quantidade", color: "black" }
                 }
             },
             plugins: {
                 legend: {
-                    labels: { color: "white" }
+                    labels: { color: "black" }
                 }
             }
         }
@@ -102,18 +105,18 @@
             scales: {
                 y: { beginAtZero: true,
                     ticks: {
-                        color: "white"
+                        color: "black"
                     }
                 },
                 x: {
                     ticks: {
-                        color: "white" // Cor dos rótulos do eixo X
+                        color: "black" // Cor dos rótulos do eixo X
                     }
                 }
             },
             plugins: {
                 legend: {
-                    labels: { color: "white" }
+                    labels: { color: "black" }
                 }
             }
         }

@@ -95,7 +95,33 @@
 .cardInter{
     border: 1px solid white !important;
 }
+.btnData{
+    border: 1px solid #48489f !important;
+}
+.btnData:hover{
+    background-color: #48489f !important;
+    color: white !important;
+}
+.nj{
+    border-bottom: 1px solid #48489f;
+}
+.tu{
+    border-bottom: 1px solid #000092;
+}
+.card-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
 @media(max-width: 640px){
+    .select2-selection__rendered{
+        width: 200px !important;
+    }
+    .card-header{
+        flex-direction: column;
+        gap: 0;
+    }
     .card{
         width: 100% !important;
     }
